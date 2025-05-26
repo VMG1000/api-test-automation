@@ -1,0 +1,26 @@
+{
+  "id": "test-environment",
+  "name": "Test Environment",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "https://serverest.dev",
+      "enabled": true
+    },
+    {
+      "key": "user_email",
+      "value": "fulano@qa.com",
+      "enabled": true
+    },
+    {
+      "key": "user_password",
+      "value": "teste",
+      "enabled": true
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "enabled": true
+    }
+  ]
+}
