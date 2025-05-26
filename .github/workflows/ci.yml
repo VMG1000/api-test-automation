@@ -25,8 +25,8 @@ jobs:
       - name: Run Newman Tests
         run: |
           mkdir -p reports
-          newman run collections/ServerestAPI.postman_collection.json \
-            -e environments/ServerestAPI.postman_environment.json \
+          newman run postman/collection.json \
+            -e postman/ServerestAPI.postman_environment.json \
             --reporters cli,html \
             --reporter-html-export reports/report.html
 
