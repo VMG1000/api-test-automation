@@ -1,4 +1,4 @@
-# 🚀 Automação de Testes de API - Banco Carrefour
+# 🚀 Automação de Testes de API -
 
 [![API Tests](https://github.com/VMG1000/api-test-automation/actions/workflows/api-tests.yml/badge.svg)](https://github.com/VMG1000/api-test-automation/actions/workflows/api-tests.yml)
 
