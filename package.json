@@ -1,0 +1,48 @@
+{
+  "name": "api-test-automation",
+  "version": "1.0.0",
+  "description": "Automação de Testes de API para Banco Carrefour",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run setup && newman run postman/collection.json -e postman/environment.json --reporters cli,htmlextra --reporter-htmlextra-export reports/report.html",
+    "test:simple": "newman run postman/collection.json -e postman/environment.json",
+    "test:junit": "newman run postman/collection.json -e postman/environment.json --reporters cli,junit --reporter-junit-export reports/results.xml",
+    "test:full": "npm run setup && newman run postman/collection.json -e postman/environment.json --reporters cli,junit,htmlextra --reporter-junit-export reports/results.xml --reporter-htmlextra-export reports/report.html",
+    "setup": "node scripts/setup-test-data.js",
+    "setup:only": "node scripts/setup-test-data.js",
+    "pretest": "node -e \"const fs = require('fs'); if (!fs.existsSync('reports')) fs.mkdirSync('reports', {recursive: true});\"",
+    "clean": "node -e \"const fs = require('fs'); const path = require('path'); if (fs.existsSync('reports')) { fs.rmSync('reports', {recursive: true, force: true}); fs.mkdirSync('reports'); }\"",
+    "install:newman": "npm install -g newman newman-reporter-htmlextra",
+    "docker:test": "docker run -v $(pwd):/workspace -w /workspace postman/newman:latest run postman/collection.json -e postman/environment.json",
+    "docker:test:win": "docker run -v %cd%:/workspace -w /workspace postman/newman:latest run postman/collection.json -e postman/environment.json",
+    "test:win": "npm run setup && newman run postman/collection.json -e postman/environment.json --reporters cli,htmlextra --reporter-htmlextra-export reports/report.html"
+  },
+  "keywords": [
+    "api",
+    "testing",
+    "automation",
+    "postman",
+    "newman", 
+    "rest",
+    "carrefour"
+  ],
+  "author": "VMG1000",
+  "license": "MIT",
+  "devDependencies": {
+    "newman": "^6.0.0",
+    "newman-reporter-htmlextra": "^1.23.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VMG1000/api-test-automation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VMG1000/api-test-automation/issues"
+  },
+  "homepage": "https://github.com/VMG1000/api-test-automation#readme"
+}

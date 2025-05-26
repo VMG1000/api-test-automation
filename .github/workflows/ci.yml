@@ -1,0 +1,37 @@
+name: Newman Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-newman-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-html
+
+      - name: Run Newman Tests
+        run: |
+          mkdir -p reports
+          newman run collections/ServerestAPI.postman_collection.json \
+            -e environments/ServerestAPI.postman_environment.json \
+            --reporters cli,html \
+            --reporter-html-export reports/report.html
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report
+          path: reports/report.html
